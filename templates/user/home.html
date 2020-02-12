@@ -1,0 +1,140 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+
+{% block content %}
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Computadoras</h1>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="content mt-3">
+
+    <div class="col-lg-3 col-md-6">
+        <div class="social-box facebook">
+            <img src="{% static 'img/monitor.png'%}" class="img_monitor" alt="Logo" style="max-width: 70%">
+            <div>
+                <span class="menu-icon fa fa-clock-o"> Tiempo: 1h</span><br>
+                <span class="menu-icon fa fa-user"> Usuario: jesus</span><br>    
+            </div>
+            
+            <ul>
+                <li>
+                   <button class="btn btn-warning"><i class="menu-icon fa fa-refresh"></i></button>
+                </li>
+                <li>
+                    <button class="btn btn-danger btn_power"><i class=" fa fa-power-off"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="social-box facebook">
+            <img src="{% static 'img/monitor.png'%}" alt="Logo" style="max-width: 70%">
+            <div>
+                <span class="menu-icon fa fa-clock-o"> Tiempo: 1h</span><br>
+                <span class="menu-icon fa fa-user"> Usuario: jesus</span><br>    
+            </div>
+            
+            <ul>
+                <li>
+                   <button class="btn btn-warning"><i class="menu-icon fa fa-refresh"></i></button>
+                </li>
+                <li>
+                    <button class="btn btn-danger"><i class=" fa fa-power-off"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="social-box facebook">
+            <img src="{% static 'img/monitor.png'%}" alt="Logo" style="max-width: 70%">
+            <div>
+                <span class="menu-icon fa fa-clock-o"> Tiempo: 1h</span><br>
+                <span class="menu-icon fa fa-user"> Usuario: jesus</span><br>    
+            </div>
+            
+            <ul>
+                <li>
+                   <button class="btn btn-warning"><i class="menu-icon fa fa-refresh"></i></button>
+                </li>
+                <li>
+                    <button class="btn btn-danger"><i class=" fa fa-power-off"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="social-box facebook">
+            <img src="{% static 'img/monitor.png'%}" alt="Logo" style="max-width: 70%">
+            <div>
+                <span class="menu-icon fa fa-clock-o"> Tiempo: 1h</span><br>
+                <span class="menu-icon fa fa-user"> Usuario: jesus</span><br>    
+            </div>
+            <ul>
+                <li>
+                   <button class="btn btn-warning"><i class="menu-icon fa fa-refresh"></i></button>
+                </li>
+                <li>
+                    <button class="btn btn-danger"><i class=" fa fa-power-off"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="social-box facebook">
+            <img src="{% static 'img/monitor.png'%}" alt="Logo" style="max-width: 70%">
+            <div>
+                <span class="menu-icon fa fa-clock-o"> Tiempo: 1h</span><br>
+                <span class="menu-icon fa fa-user"> Usuario: jesus</span><br>    
+            </div>
+            <ul>
+                <li>
+                   <button class="btn btn-warning"><i class="menu-icon fa fa-refresh"></i></button>
+                </li>
+                <li>
+                    <button class="btn btn-danger"><i class=" fa fa-power-off"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="social-box facebook">
+            <img src="{% static 'img/monitor.png'%}" alt="Logo" style="max-width: 70%">
+            <div>
+                <span class="menu-icon fa fa-clock-o"> Tiempo: 1h</span><br>
+                <span class="menu-icon fa fa-user"> Usuario: jesus</span><br>    
+            </div>
+            <ul>
+                <li>
+                   <button class="btn btn-warning"><i class="menu-icon fa fa-refresh"></i></button>
+                </li>
+                <li>
+                    <button class="btn btn-danger"><i class=" fa fa-power-off"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</div> <!-- .content -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+    $(".btn_power").click(function(){
+        console.log('joder');
+        $(".img_monitor").css('opacity','0.2');
+    })
+</script>
+
+
+{% endblock%}

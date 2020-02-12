@@ -1,0 +1,145 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block content %}
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Anuncios</h1>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="content ">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body" style="overflow-x:auto;">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <h3>Publicidad 1</h3>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <span class="pull-right">
+                                            <button class="btn btn-info addAd"  data-toggle="modal" data-target="#exampleModal" value="1" >+ Agregar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    {% if advertises %}
+                                        {% for ad in advertises %}
+                                            {% if ad.typea == 1 %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ ad.name }}
+                                                <input type="hidden" value="{{ ad.typea }}  ">
+                                                <span class="pull-center">
+                                                    <img style="width:60px;height: auto;"  src="{{ ad.image.url }}" />
+                                                </span>
+                                                <span class="pull-right">
+                                                    <a href="{% url 'product:edit_advertise' ad.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
+                                                    <a href="{% url 'product:delete_advertise' ad.id %}" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar: {{ad.name}}?')"><i class="fa fa-trash"></i></a>
+                                                </span>
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>no existe publicidad</p>
+                                    {% endif%}
+                                  </ul>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <h3>Publicidad 2</h3>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <span class="pull-right">
+                                            <button  class="btn btn-info addAd"  data-toggle="modal" data-target="#exampleModal" value="2" >+ Agregar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    {% if advertises %}
+                                        {% for ad in advertises %}
+                                            {% if ad.typea == 2 %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ ad.name }}
+                                                <input type="hidden" value="{{ ad.typea }}  ">
+                                                
+                                                <span class="pull-center">
+                                                    <img style="width:60px;height: auto;"  src="{{ ad.image.url }}" />
+                                                </span>
+                                                <span class="pull-right">
+                                                    <a href="{% url 'product:edit_advertise' ad.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
+                                                    <a href="{% url 'product:delete_advertise' ad.id %}" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar: {{ad.name}}?')"><i class="fa fa-trash"></i></a>
+                                                </span>
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>no existe publicidad</p>
+                                    {% endif%}
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'product:add_advertise'%}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>nombre</label>
+                    <input type="text" name="name" required>
+                    <input type="hidden" name="typea" id="p1">
+                </div>
+                <div class="form-group">
+                    <label>image</label>
+                    <input type="file" name="image">
+                </div>
+                <div class="form-grop">
+                    <label>Texto</label>
+                    <textarea name="description" cols="30" rows="10"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+    console.log('{{joder}}')
+    $(".addAd").click(function(){
+        val_id = $(this).val();
+        $("#p1").val(val_id);
+
+    })
+</script>
+{% endblock%}
+

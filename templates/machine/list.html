@@ -1,0 +1,81 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block content %}
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Maquinas</h1>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="content ">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="col-md-2 offset-md-10">
+                            <a href="{% url 'machine:add_machine' %}" class="btn btn-info">+ Maquina</a>
+                        </div>
+                      
+                    </div>
+                    <div class="card-body" style="overflow-x:auto;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nro de maquina</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">usuario</th>
+                                    <th scope="col">IP</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if machines %}
+                                    {% for machine in machines%}
+                                        <tr>
+                                            <td>{{ machine.number}}</td>
+                                            <td>{{ machine.name }}</td>
+                                            <td>{{ machine.user_id }}</td>
+                                            <td>{{ machine.ip}}</td>
+                                            <td>
+                                                
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                        <a href="{% url 'machine:edit_machine' machine.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
+                                                        
+                                                        </span>
+                                                    </div>
+                                                
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                 <p>no existen productos</p>
+                                {% endif%}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+
+           
+        </div>
+    </div><!-- .animated -->
+</div>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+    
+   
+</script>
+{% endblock%}
+

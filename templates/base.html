@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!doctype html>
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cyber Caffe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/flag-icon.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/style-custom.css' %}" rel="stylesheet"/>
+    
+</head>
+
+<body>
+
+    <!-- Left Panel -->
+    {% include "leftpanel.html"%}   
+    
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        {% include "header.html"%}   
+        
+        <!-- content-->
+        {% block content %}
+        {% endblock %}
+
+        
+    </div><!-- /#right-panel -->
+
+    {% include "footer.html"%}   
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ 
+</body>
+
+</html>

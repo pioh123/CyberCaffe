@@ -1,0 +1,23 @@
+ <!-- Left Panel -->
+ {% load staticfiles %}
+ <aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div style="display: inline-block;">
+            <div class="navbar-header">
+                <a class="navbar-brand"  href="#"><img src="{% static 'img/cybercof.png'%}" alt="Logo"  style=" height: 120px;  "></a>
+            </div>    
+        </div>
+        
+        <div class="sidebar-social">
+
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'home_n'%}"><i class="fa fa-home"></i><span>Inicio</span></a></li>
+                <li><a href="{% url 'machine:list_machine'%}"><i class="fa fa-desktop"></i><span>Computadoras</span></a></li>
+                <li><a href="{% url 'user:list_user'%}"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
+                <li><a href="report.html"><i class="fa fa-file-text"></i><span>Reporte</span></a></li>
+                <li><a href="{% url 'product:list_product' %}" ><i class="fa fa-table"></i><span>Productos</span></a></li>
+                <li><a href="{% url 'product:list_advertise' %}" ><i class="fa fa-eye"></i><span>Publicidad</span></a></li>
+            </ul>
+        </div>
+    </nav>
+</aside><!-- /#left-panel -->
