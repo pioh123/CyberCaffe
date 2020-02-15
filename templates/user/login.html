@@ -34,14 +34,16 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form>
+                    <form method="POST">
+                        {% csrf_token %}
+                        
                         <div class="form-group">
-                            <label>e-mail</label>
-                            <input type="email" class="form-control" placeholder="Email">
+                            <label>Nombre de usuario</label>
+                            <input type="text" class="form-control"  name="username">
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" name="password">
                         </div>
                         <div class="checkbox">
                             <label class="pull-right">

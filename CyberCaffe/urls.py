@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth.views import LoginView
-from apps.user.views import Home
+from django.contrib.auth import views as auth_view
 from django.conf import settings
 from django.conf.urls.static import static
+from apps.user.views import Home
+from rest_framework.authtoken import views
+from apps.product.views import Login, Logout
 
 
 urlpatterns = [
@@ -27,8 +30,10 @@ urlpatterns = [
     path('product/', include(('apps.product.urls','product'))),
     path('machine/', include(('apps.machine.urls','machine'))),
     path('home', Home.as_view(), name= 'home_n'),
-    path('',LoginView.as_view(template_name='user/login.html'), name='login_user'),
-
+    #path('',LoginView.as_view(template_name='user/login.html'),name='login'),
+    path('api_generate_token/',views.obtain_auth_token),
+    path('login/',Login.as_view(),name='login'),
+    path('logout/',Logout.as_view(),name='logout')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

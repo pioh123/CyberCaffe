@@ -1,15 +1,66 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from .models import User
-from .form import UserForm
+from django.contrib.auth.models import User
+
+
+#from .models import User
+from .form import UserForm, LoginAdminForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import login
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 #def home(request):
  #   return render(request, 'user/home.html')
+class RegisterUser(CreateView):
+    model = User
+    template_name = "user/register.html"
+    form_class = UserForm
+    success_url = reverse_lazy('home_n')
+
+
+class Home(TemplateView):
+    template_name = 'user/home.html'
+
+class ListUser(ListView):
+    pass
+
+class EditUser(UpdateView):
+    pass
+
+def deleteUser(request, id):
+    pass
+
+
+def listUser(request):
+    pass
+
+
+'''class Login(FormView):
+    template_name = 'login.html'
+    form_class = LoginAdminForm
+    
+
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(self,request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(Login,self).dispatch(request, *args, **kwargs)
+        
+        def form_valid(self,form):
+            login(self.request, form.get_user())
+            return super(Login,self).form_valid(form)
+
 
 class Home(TemplateView):
     template_name = 'user/home.html'
@@ -53,6 +104,8 @@ def listUser(request):
     page = request.GET.get('page')
     users = paginator.get_page(page)
     return render(request, 'user/list.html',{"users":users})
+
+'''
 
 '''def editUser(request, id):
     user_form = None
