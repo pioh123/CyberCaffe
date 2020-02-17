@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from apps.user.views import Home
 from rest_framework.authtoken import views
-from apps.product.views import Login, Logout
+from apps.user.views import Login, Logout
 
 
 urlpatterns = [
@@ -32,7 +32,7 @@ urlpatterns = [
     path('home', Home.as_view(), name= 'home_n'),
     #path('',LoginView.as_view(template_name='user/login.html'),name='login'),
     path('api_generate_token/',views.obtain_auth_token),
-    path('login/',Login.as_view(),name='login'),
+    path('',Login.as_view(),name='login'),
     path('logout/',Logout.as_view(),name='logout')
 ]
 if settings.DEBUG:

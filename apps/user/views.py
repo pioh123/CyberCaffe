@@ -1,21 +1,50 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-
-
-#from .models import User
-from .form import UserForm, LoginAdminForm
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.generic.edit import FormView
+from django.contrib.auth import login, logout, authenticate
+from django.http import HttpResponseRedirect
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.forms import AuthenticationForm
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
+from .models import Customer
+from .form import UserForm, LoginAdminForm, CustomerForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
-from django.views.generic.edit import FormView
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import login
-from django.http import HttpResponseRedirect
 
+class Login(FormView):
+    template_name = "user/login.html"
+    form_class = AuthenticationForm
+    success_url = reverse_lazy('product:product_list_API')
+
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(self,request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(Login,self).dispatch(request,*args,**kwargs)
+    def form_valid(self, form):
+        user = authenticate(username = form.cleaned_data['username'], password = form.cleaned_data['password'])
+        token,_ = Token.objects.get_or_create(user=user)
+        if token:
+            login(self.request, form.get_user())
+            return super(Login,self).form_valid(form)
+
+class Logout(APIView):
+    def get(self,request,format=None):
+        request.user.auth_token.delete()
+        logout(request)
+        return Response(status = status.HTTP_200_OK)
 
 # Create your views here.
 #def home(request):
@@ -26,6 +55,14 @@ class RegisterUser(CreateView):
     form_class = UserForm
     success_url = reverse_lazy('home_n')
 
+class RegisterCustomer(CreateView):
+    model = Customer
+    template_name = "user/register.html"
+    form_class = CustomerForm
+    success_url = reverse_lazy('home_n')
+
+   
+
 
 class Home(TemplateView):
     template_name = 'user/home.html'
@@ -33,15 +70,29 @@ class Home(TemplateView):
 class ListUser(ListView):
     pass
 
-class EditUser(UpdateView):
-    pass
+class EditCustomer(UpdateView):
+    model = Customer
+    template_name = 'user/register.html'
+    form_class = CustomerForm
+    success_url = reverse_lazy('user:list_user')
 
 def deleteUser(request, id):
     pass
 
 
 def listUser(request):
-    pass
+    query = request.GET.get('search')
+    users = Customer.objects.all()
+    if query:
+        users = Customer.objects.filter(
+            Q(first_name__icontains = query)|
+            Q(dni__icontains = query)
+        )
+    paginator = Paginator(users, 10)
+    page = request.GET.get('page')
+    users = paginator.get_page(page)
+    return render(request, 'user/list.html',{"users":users})
+    
 
 
 '''class Login(FormView):

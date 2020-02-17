@@ -29,17 +29,7 @@ class MachineForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
-            'start_time': forms.DateTimeInput(
-                attrs={
-                    'class': 'datepicker'
-                }
-            ),
-            'end_time': forms.DateTimeInput(),
-            'user_id': forms.Select(
-                attrs={
-                    'class': 'form-control error'
-                }
-            )
+
             
         }
         

@@ -1,25 +1,22 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
-
-class User(models.Model):
-    id = models.AutoField(primary_key = True)
-    first_name = models.CharField(max_length = 30, verbose_name = "Nombres")
-    last_name = models.CharField(max_length = 30, blank = True, null = True, verbose_name = "Apellidos")
+class Customer(User):
     dni = models.IntegerField(unique=True)
-    phone = models.CharField(max_length = 30, blank = True, null = True, verbose_name = "Telefono")
-    money = models.FloatField(blank=True, null=True, verbose_name="Saldo (S/.)")
-    register = models.DateTimeField(auto_now = True, auto_now_add=False)
-    password = models.CharField(max_length=20, null=True)
-    email = models.EmailField(max_length=50,unique=True,null=True, verbose_name="Email")
-
+    phone = models.CharField(max_length = 30, blank = True, null = True )
+    money = models.FloatField(blank=True, null=True)
+    hoard = models.FloatField(blank=True, null=True)
     class Meta:
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
-        ordering = ["first_name"]
-
+        
     def __str__(self):
-        return self.first_name
+        return self.username
+
+
 
 class Expend(models.Model):
     id = models.AutoField(primary_key= True)
@@ -31,3 +28,8 @@ class Expend(models.Model):
     class Meta:
         verbose_name = "Historial"
         verbose_name_plural = "Historiales de gastos"
+
+
+class Promotion(models.Model):
+    id = models.AutoField(primary_key= True)
+    name = models.CharField(max_length=20, blank=True, null=True,verbose_name="Promoción")

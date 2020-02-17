@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django import forms
-#from .models import User
+from .models import Customer
 
 
 
@@ -17,7 +17,32 @@ class UserForm(UserCreationForm):
         }
 
 
-
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['username','first_name','password','last_name','email','phone','dni','money']
+        labels = {
+            'username':'Usuario',
+            'first_name':'Nombres',
+            'last_name':'Apellidos',
+            'password':'Contraseña',
+            'email':'Correo',
+            'phone':'Celular',
+            'dni':'DNI',
+            'money':'Saldo(S/.)'
+        }
+        widgets = {
+            'username':forms.TextInput(attrs={'class':'form-control'}),
+            'first_name':forms.TextInput(attrs={'class':'form-control'}),
+            'last_name':forms.TextInput(attrs={'class':'form-control'}),
+            'password':forms.PasswordInput(attrs={'class':'form-control'}),
+            'email':forms.TextInput(attrs={'class':'form-control'}),
+            'phone':forms.TextInput(attrs={'class':'form-control'}),
+            'dni': forms.TextInput(attrs = {'class': 'form-control'}),
+            'money': forms.NumberInput(attrs= {'class': 'form-control'})
+            
+        }
+   
 
 """class UserForm(forms.ModelForm):
     class Meta:

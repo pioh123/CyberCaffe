@@ -1,11 +1,23 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import generics
 from .models import Machine
 from .form import MachineForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from .serializer import MachineSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+
+
+
+class MachineListAPI(generics.ListCreateAPIView):
+    queryset = Machine.objects.all()
+    serializer_class = MachineSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
 
 # Create your views here.

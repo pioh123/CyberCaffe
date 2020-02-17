@@ -13,7 +13,9 @@ urlpatterns = [
     path('addAdvertise', views.addAdvertise, name="add_advertise"),
     path('editAdvertise/<int:pk>', views.EditAdvertise.as_view(), name="edit_advertise"),
     path('deleteAdvertise/<int:id>', views.deleteAdvertise, name= 'delete_advertise'),
-    path('productoAPI',views.ProductListAPI.as_view(),name='product_list_API')
+    path('productoAPI',views.ProductListAPI.as_view(),name='product_list_API'),
+    path('advertiseAPI',views.AdvertiseListAPI.as_view(),name='advertise_list_API')
+    
     
 ]
 

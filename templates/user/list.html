@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-md-2 offset-md-10">
-                            <a href="{% url 'user:register_user' %}" class="btn btn-info">+ Usuario</a>
+                            <a href="{% url 'user:register_customer' %}" class="btn btn-info">+ Usuario</a>
                         </div>
                         <form method="get">
                             <div id="search-user">
@@ -62,7 +62,7 @@
                                                 <form class="form-inline" >
                                                     <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <a href="{% url 'user:edit_user' user.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
+                                                        <a href="{% url 'user:edit_customer' user.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
                                                         <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit"></i></button>-->
                                                         <a href="{% url 'user:delete_user' user.id %}" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar: {{user.first_name}}?')"> <i class="fa fa-trash"></i></a>
                                                         
