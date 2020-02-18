@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Advertise
+from .models import Product, Advertise, Promotion
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,4 +12,8 @@ class AdvertiseSerializer(serializers.ModelSerializer):
         model = Advertise
         fields = ('id','name','image','description','typea')
 
+class PromotionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Promotion
+        fields = ('id','name','image')
 

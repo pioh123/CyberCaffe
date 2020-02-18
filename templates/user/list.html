@@ -19,7 +19,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-md-2 offset-md-10">
-                            <a href="{% url 'user:register_customer' %}" class="btn btn-info">+ Usuario</a>
+                            <!--<a href="{% url 'user:register_customer' %}" class="btn btn-info">+ Usuario</a>-->
+                            <a href="{% url 'user:register_user' %}" class="btn btn-info">+ Usuario</a>
                         </div>
                         <form method="get">
                             <div id="search-user">
@@ -39,7 +40,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">DNI</th>
+                                    <th scope="col">Nombre de usuario</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Apellido</th>
                                     
@@ -52,7 +53,7 @@
                                 {% if users %}
                                     {% for user in users%}
                                         <tr>
-                                            <td>{{ user.dni}}</td>
+                                            <td>{{ user.username}}</td>
                                             <td>{{ user.first_name }}</td>
                                             <td>{{ user.last_name }}</td>
                                             

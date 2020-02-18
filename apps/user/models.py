@@ -30,6 +30,3 @@ class Expend(models.Model):
         verbose_name_plural = "Historiales de gastos"
 
 
-class Promotion(models.Model):
-    id = models.AutoField(primary_key= True)
-    name = models.CharField(max_length=20, blank=True, null=True,verbose_name="Promoción")

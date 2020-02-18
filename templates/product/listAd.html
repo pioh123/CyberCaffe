@@ -87,6 +87,75 @@
                                   </ul>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <h3>Publicidad 3</h3>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <span class="pull-right">
+                                            <button class="btn btn-info addAd"  data-toggle="modal" data-target="#exampleModal" value="3" >+ Agregar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    {% if advertises %}
+                                        {% for ad in advertises %}
+                                            {% if ad.typea == 3 %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ ad.name }}
+                                                <input type="hidden" value="{{ ad.typea }}  ">
+                                                <span class="pull-center">
+                                                    <img style="width:60px;height: auto;"  src="{{ ad.image.url }}" />
+                                                </span>
+                                                <span class="pull-right">
+                                                    <a href="{% url 'product:edit_advertise' ad.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
+                                                    <a href="{% url 'product:delete_advertise' ad.id %}" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar: {{ad.name}}?')"><i class="fa fa-trash"></i></a>
+                                                </span>
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>no existe publicidad</p>
+                                    {% endif%}
+                                  </ul>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <h3>Publicidad 4</h3>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <span class="pull-right">
+                                            <button  class="btn btn-info addAd"  data-toggle="modal" data-target="#exampleModal" value="4" >+ Agregar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    {% if advertises %}
+                                        {% for ad in advertises %}
+                                            {% if ad.typea == 4 %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ ad.name }}
+                                                <input type="hidden" value="{{ ad.typea }}  ">
+                                                
+                                                <span class="pull-center">
+                                                    <img style="width:60px;height: auto;"  src="{{ ad.image.url }}" />
+                                                </span>
+                                                <span class="pull-right">
+                                                    <a href="{% url 'product:edit_advertise' ad.id %}" class="btn btn-warning"> <i class="fa fa-edit"></i></a>
+                                                    <a href="{% url 'product:delete_advertise' ad.id %}" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar: {{ad.name}}?')"><i class="fa fa-trash"></i></a>
+                                                </span>
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>no existe publicidad</p>
+                                    {% endif%}
+                                  </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

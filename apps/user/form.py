@@ -6,18 +6,16 @@ from .models import Customer
 
 
 class UserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username','first_name','last_name','email']
-        labels = {
-            'username':'Nombre de Usuario',
-            'first_name':'Nombre',
-            'last_name':'Apellidos',
-            'email':'Email'
-        }
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
 
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
+        
 
 class CustomerForm(forms.ModelForm):
+    password=forms.CharField(widget=forms.PasswordInput())
+    password2=forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model = Customer
         fields = ['username','first_name','password','last_name','email','phone','dni','money']
@@ -35,13 +33,14 @@ class CustomerForm(forms.ModelForm):
             'username':forms.TextInput(attrs={'class':'form-control'}),
             'first_name':forms.TextInput(attrs={'class':'form-control'}),
             'last_name':forms.TextInput(attrs={'class':'form-control'}),
-            'password':forms.PasswordInput(attrs={'class':'form-control'}),
+            
             'email':forms.TextInput(attrs={'class':'form-control'}),
             'phone':forms.TextInput(attrs={'class':'form-control'}),
             'dni': forms.TextInput(attrs = {'class': 'form-control'}),
             'money': forms.NumberInput(attrs= {'class': 'form-control'})
             
         }
+      
    
 
 """class UserForm(forms.ModelForm):

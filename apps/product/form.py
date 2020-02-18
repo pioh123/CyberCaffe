@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, Advertise
+from .models import Product, Advertise,Promotion
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -54,5 +54,24 @@ class AdvertiseForm(forms.ModelForm):
             'image': forms.FileInput(),
             'description': forms.Textarea(),
             'typea': forms.HiddenInput()
+        }
+
+class PromotionForm(forms.ModelForm):
+    class Meta:
+        model = Promotion
+        fields = ['name','image']
+        labels = {
+            'name': 'Nombre',
+            'image': 'Imagen',
+            
+        }
+        widgets = {
+            'name': forms.TextInput(
+                attrs= {
+                    'class': 'form-control'
+                }
+            ),
+            'image': forms.FileInput(),
+            
         }
        

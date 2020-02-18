@@ -34,6 +34,16 @@
                     </a>
                 </div>
                 <div class="login-form">
+                    {% if form.non_field_errors %}
+                    <ul class='form-errors'>
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                    {% if form.errors %}
+    {{ form.errors }} <!-- display the form errors if they exist -->
+{% endif %}
                     <form method="POST">
                         {% csrf_token %}
                         

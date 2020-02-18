@@ -7,9 +7,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from .models import Product, Advertise
-from .form import ProductForm, AdvertiseForm
-from .serializer import ProductSerializer, AdvertiseSerializer
+from .models import Product, Advertise,Promotion
+from .form import ProductForm, AdvertiseForm,PromotionForm
+from .serializer import ProductSerializer, AdvertiseSerializer,PromotionSerializer
 
 
 
@@ -23,6 +23,11 @@ class ProductListAPI(generics.ListCreateAPIView):
 class AdvertiseListAPI(generics.ListCreateAPIView):
     queryset = Advertise.objects.all()
     serializer_class = AdvertiseSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+class PromotionListAPI(generics.ListCreateAPIView):
+    queryset = Promotion.objects.all()
+    serializer_class = PromotionSerializer
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
 
@@ -93,3 +98,22 @@ def deleteAdvertise(request, id):
     advertise = Advertise.objects.get(id = id)
     advertise.delete()
     return redirect('product:list_advertise')
+
+
+class AddPromotion(CreateView):
+    model = Promotion
+    template_name = 'product/promotion.html'
+    form_class = PromotionForm
+    success_url = reverse_lazy('product:list_promotion')
+    
+class ListPromotion(ListView):
+    model = Promotion
+    context_object_name = 'promotions'
+    template_name = 'product/listpromotion.html'
+    queryset = Promotion.objects.all()
+
+class EditPromotion(UpdateView):
+    model = Promotion
+    template_name = 'product/promotion.html'
+    form_class = PromotionForm
+    success_url = reverse_lazy('product:list_promotion')

@@ -19,3 +19,7 @@ class Advertise(models.Model):
     description = models.TextField(blank=True,null=True)
     typea = models.IntegerField(blank=True, null=True)
    
+class Promotion(models.Model):
+    id = models.AutoField(primary_key= True)
+    name = models.CharField(max_length=20, blank=True, null=True,verbose_name="Promoción")
+    image = models.ImageField(upload_to='promotion',null= True, blank=True)

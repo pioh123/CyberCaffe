@@ -51,9 +51,9 @@ class Logout(APIView):
  #   return render(request, 'user/home.html')
 class RegisterUser(CreateView):
     model = User
-    template_name = "user/register.html"
+    template_name = "user/admin.html"
     form_class = UserForm
-    success_url = reverse_lazy('home_n')
+    success_url = reverse_lazy('user:list_user')
 
 class RegisterCustomer(CreateView):
     model = Customer
@@ -68,7 +68,10 @@ class Home(TemplateView):
     template_name = 'user/home.html'
 
 class ListUser(ListView):
-    pass
+    model = User
+    template_name = 'user/list.html'
+    context_object_name = 'users'
+    queryset = User.objects.all()
 
 class EditCustomer(UpdateView):
     model = Customer
