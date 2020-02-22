@@ -15,11 +15,13 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from .models import Customer
-from .form import UserForm, LoginAdminForm, CustomerForm
+from .form import  LoginAdminForm, CustomerForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib import messages
+
 
 class Login(FormView):
     template_name = "user/login.html"
@@ -50,19 +52,37 @@ class Logout(APIView):
 #def home(request):
  #   return render(request, 'user/home.html')
 class RegisterUser(CreateView):
-    model = User
+    pass
+    """model = User
     template_name = "user/admin.html"
     form_class = UserForm
-    success_url = reverse_lazy('user:list_user')
+    success_url = reverse_lazy('user:list_user')"""
 
 class RegisterCustomer(CreateView):
     model = Customer
     template_name = "user/register.html"
     form_class = CustomerForm
     success_url = reverse_lazy('home_n')
-
-   
-
+    success_message = 'New new user profile has been created'
+    
+    def form_valid(self, form):
+        c = {'form': form, }
+        user = form.save(commit=False)
+        # Cleaned(normalized) data
+        phone = form.cleaned_data['phone']
+        password = form.cleaned_data['password']
+        dni = form.cleaned_data['dni']
+        #repeat_password = form.cleaned_data['repeat_password']
+        """if password != repeat_password:
+            messages.error(self.request, "Passwords do not Match", extra_tags='alert alert-danger')
+            return render(self.request, self.template_name, c)"""
+        user.set_password(password)
+        user.save()
+ 
+        # Create UserProfile model
+        Customer.objects.create(user=user, phone=phone, dni=dni)
+ 
+        return super(RegisterCustomer, self).form_valid(form)
 
 class Home(TemplateView):
     template_name = 'user/home.html'
@@ -74,10 +94,11 @@ class ListUser(ListView):
     queryset = User.objects.all()
 
 class EditCustomer(UpdateView):
-    model = Customer
+    pass
+    """model = Customer
     template_name = 'user/register.html'
     form_class = CustomerForm
-    success_url = reverse_lazy('user:list_user')
+    success_url = reverse_lazy('user:list_user')"""
 
 def deleteUser(request, id):
     pass
